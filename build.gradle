@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id "com.heroku.sdk.heroku-gradle" version "2.0.0"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'com.sparkjava:spark-core:2.9.3'
+    implementation 'com.sparkjava:spark-template-velocity:2.7.1'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.32'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+    implementation group: 'org.apache.httpcomponents', name: 'httpasyncclient', version: '4.1.4'
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes 'Main-Class' : 'Server'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+heroku {
+    jdkVersion = 8
+    processTypes(
+            web: "java -jar build/libs/repo-provisioning-1.0-SNAPSHOT.jar"
+    )
+}
+
+
+test {
+    useJUnitPlatform()
+}
