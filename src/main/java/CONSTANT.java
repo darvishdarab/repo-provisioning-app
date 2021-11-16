@@ -1,4 +1,4 @@
-public class CONSTANT {
+public class Constant {
     final static String STAFF_TEAM_ID = System.getenv("STAFF_TEAM_ID");
     final static String GITHUB_API_BASE_URL = "https://api.github.com/";
     final static String ORG_NAME = System.getenv("ORG_NAME");

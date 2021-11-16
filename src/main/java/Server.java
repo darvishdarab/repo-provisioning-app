@@ -16,7 +16,7 @@ public class Server {
 
     public static void main(String[] args) {
 
-        port(CONSTANT.PORT);
+        port(Constant.PORT);
 
         //homepage
         get("/", (req, res) -> {
@@ -43,13 +43,13 @@ public class Server {
                     githubUsers.add(req.queryParams("githubUser" + String.valueOf(i)));
             }
 
-            String repoName = CONSTANT.REPO_BASE_NAME;
+            String repoName = Constant.REPO_BASE_NAME;
             for (String jhed: jheds)
                 repoName += "-" + jhed;
             Github.createRepo(repoName);
             for (String user: githubUsers)
                 Github.addMembers(repoName, user);
-            Github.addTeam(repoName, CONSTANT.STAFF_TEAM_ID);
+            Github.addTeam(repoName, Constant.STAFF_TEAM_ID);
 
             res.redirect("ty");
             return "";

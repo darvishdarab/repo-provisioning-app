@@ -11,7 +11,7 @@ import java.util.concurrent.Future;
 public class Github {
 
     public static void createRepo(String name) throws IOException, ExecutionException, InterruptedException {
-        String url = CONSTANT.GITHUB_API_BASE_URL + "orgs/" + CONSTANT.ORG_NAME + "/repos";
+        String url = Constant.GITHUB_API_BASE_URL + "orgs/" + Constant.ORG_NAME + "/repos";
 
         CloseableHttpAsyncClient client = HttpAsyncClients.createDefault();
         client.start();
@@ -25,7 +25,7 @@ public class Github {
 
         httpPost.setEntity(entity);
 
-        httpPost.addHeader("Authorization", "token " + CONSTANT.GITHUB_API );
+        httpPost.addHeader("Authorization", "token " + Constant.GITHUB_API );
 
         Future<HttpResponse> future = client.execute(httpPost, null);
         // and wait until a response is received
@@ -40,7 +40,7 @@ public class Github {
 
     }
     public static void addMembers(String repoName, String user) throws IOException, ExecutionException, InterruptedException {
-        String url = CONSTANT.GITHUB_API_BASE_URL + "repos/" + CONSTANT.ORG_NAME + "/" + repoName + "/collaborators/" + user;
+        String url = Constant.GITHUB_API_BASE_URL + "repos/" + Constant.ORG_NAME + "/" + repoName + "/collaborators/" + user;
         CloseableHttpAsyncClient client = HttpAsyncClients.createDefault();
         client.start();
 
@@ -55,7 +55,7 @@ public class Github {
         httpPut.setEntity(entity);
 
 
-        httpPut.addHeader("Authorization", "token " + CONSTANT.GITHUB_API);
+        httpPut.addHeader("Authorization", "token " + Constant.GITHUB_API);
 
 
         Future<HttpResponse> future = client.execute(httpPut, null);
@@ -72,7 +72,7 @@ public class Github {
     }
 
     public static void addTeam(String repoName, String teamID) throws IOException, ExecutionException, InterruptedException {
-        String url = CONSTANT.GITHUB_API_BASE_URL + "teams/" + teamID + "/repos/" + CONSTANT.ORG_NAME + "/" + repoName;
+        String url = Constant.GITHUB_API_BASE_URL + "teams/" + teamID + "/repos/" + Constant.ORG_NAME + "/" + repoName;
 
         CloseableHttpAsyncClient client = HttpAsyncClients.createDefault();
         client.start();
@@ -88,7 +88,7 @@ public class Github {
         httpPut.setEntity(entity);
 
 
-        httpPut.addHeader("Authorization", "token " + CONSTANT.GITHUB_API);
+        httpPut.addHeader("Authorization", "token " + Constant.GITHUB_API);
 
 
         Future<HttpResponse> future = client.execute(httpPut, null);
